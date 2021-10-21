@@ -4,31 +4,44 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   const soundDropdown = document.getElementById("horn-select");
-
-  console.log(soundDropdown);
-
   soundDropdown.addEventListener('change', (e) => handleSoundUpdate(e.target.value));
+
+  const playButton = document.querySelector("#expose > button");
+  playButton.addEventListener('click', (e) => handlePlayButtonClick());
 }
 
+let imgSrc = "";
+let audioSrc = "";
+let audioVolume = 0;
 
-function handleSoundUpdate (newSound) {
-  switch(newSound) {
+function handleSoundUpdate (soundName) {
+  const updateImageSource = () => {
+    const image = document.querySelector("#expose > img");
+    image.src = imgSrc;
+  }
+
+  switch(soundName) {
     case "air-horn":
-      updateImageSource("assets/images/air-horn.svg");
+      imgSrc = "assets/images/air-horn.svg";
+      audioSrc = "assets/audio/air-horn.mp3";
       break;
     case "car-horn":
-      updateImageSource("assets/images/car-horn.svg");
-
+      imgSrc = "assets/images/car-horn.svg";
+      audioSrc = "assets/audio/car-horn.mp3";
       break;
     case "party-horn":
-      updateImageSource("assets/images/party-horn.svg");
-
+      imgSrc = "assets/images/party-horn.svg";
+      audioSrc = "assets/audio/party-horn.mp3";
       break;
     default:
-
   }
+  updateImageSource();
 }
-function updateImageSource(newSource) {
-  const image = document.querySelector("#expose > img");
-  image.src = newSource;
+
+
+function handlePlayButtonClick() {
+  if(audioSrc) {
+    const audio = new Audio(audioSrc);
+    audio.play();
+  }
 }
