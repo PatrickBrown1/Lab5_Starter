@@ -6,6 +6,10 @@ const jsConfetti = new JSConfetti()
 
 window.addEventListener('DOMContentLoaded', init);
 
+let imgSrc = "";
+let audioSrc = "";
+let audioVolume = 50;
+
 function init() {
   const soundDropdown = document.getElementById("horn-select");
   soundDropdown.addEventListener('change', (e) => handleSoundUpdate(e.target.value));
@@ -15,11 +19,10 @@ function init() {
 
   const volumeInput = document.getElementById("volume");
   volumeInput.addEventListener('input', (e) => handleVolumeInput(e.target.value));
+  
+  const audio = document.querySelector("#expose > audio");
 }
 
-let imgSrc = "";
-let audioSrc = "";
-let audioVolume = 0;
 
 function handleSoundUpdate (soundName) {
   const updateImageSource = () => {
